@@ -1,0 +1,101 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45alpha31.1.dtd" >
+   <PATCH nodename="D:\Dropbox\Git Repos\V\src\_TestV.v4p" systemname="_TestV" filename="D:\Dropbox\Git Repos\V\_TestV.v4p">
+   <BOUNDS type="Window" left="9900" top="5100" width="9000" height="6000">
+   </BOUNDS>
+   <NODE systemname="Reader (CSV)" filename="bin\Debug\V.dll" nodename="Reader (CSV)" componentmode="Hidden" id="0">
+   <BOUNDS type="Node" left="1920" top="1350" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Filename" visible="1">
+   </PIN>
+   <PIN pinname="Has Headers" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Data Table" visible="1">
+   </PIN>
+   <PIN pinname="Column Type" slicecount="1" values="string">
+   </PIN>
+   </NODE>
+   <NODE systemname="Renderer (TTY)" nodename="Renderer (TTY)" componentmode="InAWindow" id="1">
+   <BOUNDS type="Node" left="4860" top="3030" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="4860" top="3030" width="2400" height="1800">
+   </BOUNDS>
+   <BOUNDS type="Window" left="20415" top="6345" width="6240" height="5085">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="2">
+   <BOUNDS type="Node" left="1935" top="660" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1935" top="660" width="1590" height="315">
+   </BOUNDS>
+   <PIN pinname="Output String" visible="1">
+   </PIN>
+   <PIN pinname="Input String" slicecount="1" values="Z:\Moscow_data.csv">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="2" srcpinname="Output String" dstnodeid="0" dstpinname="Filename">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="3">
+   <BOUNDS type="Node" left="1935" top="1965" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Data Table" dstnodeid="3" dstpinname="Data Table">
+   </LINK>
+   <NODE systemname="S+H (String)" nodename="S+H (String)" componentmode="Hidden" id="4">
+   <BOUNDS type="Node" left="1920" top="3810" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Set" visible="1">
+   </PIN>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="5">
+   <BOUNDS type="Node" left="1920" top="2940" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Bin Size" slicecount="1" values="5000">
+   </PIN>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="3" srcpinname="Row Data" dstnodeid="5" dstpinname="Input">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="7">
+   <BOUNDS type="Node" left="3075" top="2250" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3075" top="2250" width="480" height="480">
+   </BOUNDS>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Bang">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   <PIN pinname="X Input Value" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Y Input Value" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="7" srcpinname="Y Output Value" dstnodeid="4" dstpinname="Set">
+   </LINK>
+   <LINK srcnodeid="5" srcpinname="Output" dstnodeid="4" dstpinname="Input">
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="8">
+   <BOUNDS type="Node" left="1935" top="4635" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1935" top="4635" width="1665" height="405">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="4" srcpinname="Output" dstnodeid="8" dstpinname="Input String">
+   </LINK>
+   </PATCH>
