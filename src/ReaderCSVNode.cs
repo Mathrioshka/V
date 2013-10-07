@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using LumenWorks.Framework.IO.Csv;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
@@ -39,8 +35,8 @@ namespace VVVV.Nodes.V
 		[Output("Data Table")] 
 		public ISpread<DataTable> FTableOut;
 
-		[Import()] 
-		private ILogger FLogger;
+		[Import] 
+		public ILogger FLogger;
 
 		public void Evaluate(int spreadMax)
 		{
