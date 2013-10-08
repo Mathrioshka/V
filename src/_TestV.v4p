@@ -59,6 +59,8 @@
    </PIN>
    <PIN pinname="Where Expression" slicecount="1" visible="1" values="|row =&gt; Convert.ToDouble(row[3]) == 1|">
    </PIN>
+   <PIN pinname="Rows" visible="1">
+   </PIN>
    </NODE>
    <NODE systemname="GetColumn (Value)" filename="bin\Debug\V.dll" nodename="GetColumn (Value)" componentmode="Hidden" id="3">
    <BOUNDS type="Node" left="1035" top="2265" width="100" height="100">
@@ -147,9 +149,45 @@
    <LINK srcnodeid="18" srcpinname="Output String" dstnodeid="9" dstpinname="Where Expression">
    </LINK>
    <NODE systemname="AsRows" filename="bin\Debug\V.dll" nodename="AsRows" componentmode="Hidden" id="19">
-   <BOUNDS type="Node" left="2940" top="2040" width="100" height="100">
+   <BOUNDS type="Node" left="765" top="1530" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Data Table" visible="1" slicecount="1" values="||">
    </PIN>
    </NODE>
+   <LINK srcnodeid="0" srcpinname="Data Table" dstnodeid="9" dstpinname="Data Table">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="20">
+   <BOUNDS type="Node" left="3960" top="5055" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <NODE systemname="S+H (String)" nodename="S+H (String)" componentmode="Hidden" id="29">
+   <BOUNDS type="Node" left="3945" top="5715" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Set" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="20" srcpinname="Row Data" dstnodeid="29" dstpinname="Input">
+   </LINK>
+   <NODE systemname="GetSlice (Node)" nodename="GetSlice (Node)" componentmode="Hidden" id="30">
+   <BOUNDS type="Node" left="3960" top="4605" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Index" slicecount="1" values="2500000">
+   </PIN>
+   <PIN pinname="Input Node" visible="1">
+   </PIN>
+   <PIN pinname="Output Node" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="9" srcpinname="Rows" dstnodeid="30" dstpinname="Input Node">
+   </LINK>
+   <LINK srcnodeid="30" srcpinname="Output Node" dstnodeid="20" dstpinname="Data Table">
+   </LINK>
    </PATCH>
