@@ -17,6 +17,9 @@ namespace VVVV.Nodes.V
 		[Input("Where Expression", DefaultString = "row => Convert.ToDouble(row[0]) >= 37")] 
 		public IDiffSpread<string> FExpressionIn;
 
+		[Input("Refresh", IsBang = true, IsSingle = true)] 
+		public ISpread<bool> FRefreshIn;
+		
 		[Output("Rows")] 
 		public ISpread<ISpread<DataRow>> FRows;
 		
@@ -27,7 +30,7 @@ namespace VVVV.Nodes.V
 		{
 			FRows.SliceCount = FDataTableIn[0] == null ? 0 : FDataTableIn.SliceCount;
 
-			if(!FDataTableIn.IsChanged && !FExpressionIn.IsChanged) return;
+			if(!FDataTableIn.IsChanged && !FExpressionIn.IsChanged && !FRefreshIn[0]) return;
 			
 			for (var i = 0; i < spreadMax; i++)
 			{

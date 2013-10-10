@@ -14,6 +14,9 @@ namespace VVVV.Nodes.V
 		[Input("Column Index")]
 		public IDiffSpread<int> FColumnIndexIn;
 
+		[Input("Columns Count")] 
+		public IDiffSpread<int> FColumnsCountIn;
+		
 		[Output("Row Data")]
 		public ISpread<T> FRowData;
 
@@ -22,23 +25,17 @@ namespace VVVV.Nodes.V
 
 		public void Evaluate(int spreadMax)
 		{
-			if (FRowIn.SliceCount == 0 || FRowIn[0] == null)
-			{
-				FRowData.SliceCount = 0;
-				return;
-			}
+			FRowData.SliceCount = FRowIn[0] == null ? 0 : spreadMax;
 			
-			FRowData.SliceCount = spreadMax;
-
-			if(!FRowIn.IsChanged && !FColumnIndexIn.IsChanged) return;
+			if(FRowData.SliceCount == 0) return;
+			if(!FRowIn.IsChanged && !FColumnIndexIn.IsChanged && !FColumnsCountIn.IsChanged) return;
 			
 			for (var i = 0; i < spreadMax; i++)
 			{
 				if (FRowIn[i] == null) continue;
-
 				try
 				{
-					FRowData[i] = FRowIn[i].Field<T>(FColumnIndexIn[i]);
+					FRowData[i] = FRowIn[i].Field<T>(FColumnIndexIn[i] % FColumnsCountIn[i]);
 				}
 				catch (Exception ex)
 				{

@@ -11,22 +11,25 @@ namespace VVVV.Nodes.V
 	[PluginInfo(Name = "Reader", Category = "CSV", Author = "alg", Tags = "data visualization")]
 	public class ReaderCsvNode : IPluginEvaluate
 	{
-		[Input("Filename", StringType = StringType.Filename)] 
+		[Input("Filename", StringType = StringType.Filename)]
 		public IDiffSpread<string> FFileNameIn;
 
-		[Input("Has Headers", IsToggle = true)] 
+		[Input("Has Headers", IsToggle = true)]
 		public IDiffSpread<bool> FHasHeadersIn;
 
-		[Input("Column Type", DefaultString = "string")] 
+		[Input("Column Type", DefaultString = "string")]
 		public IDiffSpread<ISpread<string>> FColumnTypeIn;
 
-		[Input("Delimiter", DefaultString = ";", Visibility = PinVisibility.OnlyInspector)] 
+		[Input("Read", IsBang = true, IsSingle = true)]
+		public ISpread<bool> FReadIn;
+		
+		[Input("Delimiter", DefaultString = ";", Visibility = PinVisibility.OnlyInspector)]
 		public IDiffSpread<string> FDelimiterIn;
 
-		[Input("Quote Character", DefaultString = "\"", Visibility = PinVisibility.OnlyInspector)] 
+		[Input("Quote Character", DefaultString = "\"", Visibility = PinVisibility.OnlyInspector)]
 		public IDiffSpread<string> FQuoteCharIn;
 
-		[Input("Escape Chararacter", DefaultString = "\\", Visibility = PinVisibility.OnlyInspector)] 
+		[Input("Escape Chararacter", DefaultString = "\\", Visibility = PinVisibility.OnlyInspector)]
 		public IDiffSpread<string> FEcapeCharIn;
 
 		[Input("Comment Character", DefaultString = "#", Visibility = PinVisibility.OnlyInspector)]
@@ -44,7 +47,7 @@ namespace VVVV.Nodes.V
 			FTableOut.SliceCount = maxTables;
 
 			if (!FFileNameIn.IsChanged && !FHasHeadersIn.IsChanged && !FColumnTypeIn.IsChanged && !FDelimiterIn.IsChanged 
-					&& !FQuoteCharIn.IsChanged && !FEcapeCharIn.IsChanged && !FCommentCharIn.IsChanged) return;
+					&& !FQuoteCharIn.IsChanged && !FEcapeCharIn.IsChanged && !FCommentCharIn.IsChanged && !FReadIn[0]) return;
 
 			for (var i = 0; i < maxTables; i++)
 			{	
@@ -96,7 +99,6 @@ namespace VVVV.Nodes.V
 				{
 					FLogger.Log(LogType.Error, ex.Message);
 				}
-				
 			}
 		}
 	}
