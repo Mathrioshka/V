@@ -8,14 +8,11 @@ namespace VVVV.Nodes.V
 {
 	public abstract class GetColumn<T> : IPluginEvaluate
 	{
-		[Input("Data Table")]
+		[Input("Data Row")]
 		public IDiffSpread<DataRow> FRowIn;
 
-		[Input("Column Index")]
+		[Input("Column Index", MinValue = 0)]
 		public IDiffSpread<int> FColumnIndexIn;
-
-		[Input("Columns Count")] 
-		public IDiffSpread<int> FColumnsCountIn;
 		
 		[Output("Row Data")]
 		public ISpread<T> FRowData;
@@ -28,14 +25,15 @@ namespace VVVV.Nodes.V
 			FRowData.SliceCount = FRowIn[0] == null ? 0 : spreadMax;
 			
 			if(FRowData.SliceCount == 0) return;
-			if(!FRowIn.IsChanged && !FColumnIndexIn.IsChanged && !FColumnsCountIn.IsChanged) return;
+
+			if(!FRowIn.IsChanged && !FColumnIndexIn.IsChanged) return;
 			
 			for (var i = 0; i < spreadMax; i++)
 			{
 				if (FRowIn[i] == null) continue;
 				try
 				{
-					FRowData[i] = FRowIn[i].Field<T>(FColumnIndexIn[i] % FColumnsCountIn[i]);
+					FRowData[i] = FRowIn[i].Field<T>(FColumnIndexIn[i]);
 				}
 				catch (Exception ex)
 				{

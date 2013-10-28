@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>..\Dependencies\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="LumenWorks.Framework.IO">
       <HintPath>..\Dependencies\LumenWorks.Framework.IO.dll</HintPath>
     </Reference>
@@ -78,7 +81,9 @@
     <Compile Include="GetColumnNode.cs" />
     <Compile Include="ReaderCSVNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReaderXLSNode.cs" />
     <Compile Include="TableExtensions.cs" />
+    <Compile Include="TableReader.cs" />
     <Compile Include="WhereLinqNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

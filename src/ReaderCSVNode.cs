@@ -9,20 +9,8 @@ using VVVV.PluginInterfaces.V2;
 namespace VVVV.Nodes.V
 {
 	[PluginInfo(Name = "Reader", Category = "CSV", Author = "alg", Tags = "data visualization")]
-	public class ReaderCsvNode : IPluginEvaluate
-	{
-		[Input("Filename", StringType = StringType.Filename)]
-		public IDiffSpread<string> FFileNameIn;
-
-		[Input("Has Headers", IsToggle = true)]
-		public IDiffSpread<bool> FHasHeadersIn;
-
-		[Input("Column Type", DefaultString = "string")]
-		public IDiffSpread<ISpread<string>> FColumnTypeIn;
-
-		[Input("Read", IsBang = true, IsSingle = true)]
-		public ISpread<bool> FReadIn;
-		
+	public class ReaderCsvNode : TableReader
+	{		
 		[Input("Delimiter", DefaultString = ";", Visibility = PinVisibility.OnlyInspector)]
 		public IDiffSpread<string> FDelimiterIn;
 
@@ -34,17 +22,11 @@ namespace VVVV.Nodes.V
 
 		[Input("Comment Character", DefaultString = "#", Visibility = PinVisibility.OnlyInspector)]
 		public IDiffSpread<string> FCommentCharIn;
-		
-		[Output("Data Table")] 
-		public ISpread<DataTable> FTableOut;
 
-		[Import] 
-		public ILogger FLogger;
-
-		public void Evaluate(int spreadMax)
+		public override void Evaluate(int spreadMax)
 		{
 			var maxTables = FFileNameIn.SliceCount;
-			FTableOut.SliceCount = maxTables;
+			FTableOut.SliceCount = FColumnsCountOut.SliceCount = FLoaded.SliceCount = maxTables;
 
 			if (!FFileNameIn.IsChanged && !FHasHeadersIn.IsChanged && !FColumnTypeIn.IsChanged && !FDelimiterIn.IsChanged 
 					&& !FQuoteCharIn.IsChanged && !FEcapeCharIn.IsChanged && !FCommentCharIn.IsChanged && !FReadIn[0]) return;
@@ -54,7 +36,8 @@ namespace VVVV.Nodes.V
 				var hasHeaders = FHasHeadersIn[i];
 
 				var table = new DataTable();
-
+				FLoaded[i] = false;
+				FColumnsCountOut[i] = 0;
 				try
 				{
 					using (var csv = new CsvReader(new StreamReader(FFileNameIn[i]), hasHeaders, FDelimiterIn[i][0], FQuoteCharIn[i][0], 
@@ -93,6 +76,8 @@ namespace VVVV.Nodes.V
 						}
 
 						FTableOut[i] = table;
+						FColumnsCountOut[i] = table.Columns.Count;
+						FLoaded[i] = true;
 					}
 				}
 				catch (Exception ex)

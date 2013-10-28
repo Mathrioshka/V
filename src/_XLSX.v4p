@@ -1,0 +1,517 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta31.dtd" >
+   <PATCH nodename="d:\Dropbox\Git Repos\V\src\_XLSX.v4p" systemname="_Parser" filename="D:\Dropbox\Git Repos\V\src\_Parser.v4p">
+   <BOUNDS type="Window" left="5625" top="0" width="17130" height="16200">
+   </BOUNDS>
+   <NODE systemname="Reader (CSV)" filename="bin\Debug\V.dll" nodename="Reader (CSV)" componentmode="Hidden" id="0">
+   <BOUNDS type="Node" left="4920" top="1095" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1">
+   </PIN>
+   <PIN pinname="Filename" slicecount="1" values="|..\..\..\Mathrioshka Collaborative\Thomson Reuters\UrbanData\In\2013-10-10 Исправленные Semantic Data\Safety_voc_upd_01.08-30.09 CLEANED.csv|">
+   </PIN>
+   <PIN pinname="Has Headers" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Loaded" visible="1">
+   </PIN>
+   <PIN pinname="Columns Count" visible="1">
+   </PIN>
+   <PIN pinname="Read" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <NODE systemname="IOBox (Node)" nodename="IOBox (Node)" componentmode="InABox" id="1">
+   <BOUNDS type="Node" left="3615" top="2190" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3615" top="2190" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Input Node" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Data Table" dstnodeid="1" dstpinname="Input Node">
+   </LINK>
+   <NODE systemname="AsRows" filename="bin\Debug\V.dll" nodename="AsRows" componentmode="Hidden" id="2">
+   <BOUNDS type="Node" left="4830" top="2565" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1">
+   </PIN>
+   <PIN pinname="Rows" visible="1">
+   </PIN>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Data Table" dstnodeid="2" dstpinname="Data Table">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="3">
+   <BOUNDS type="Node" left="4830" top="4845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Columns Count" slicecount="1" visible="1" values="999">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" visible="1" values="0">
+   </PIN>
+   <BOUNDS type="Box" left="4830" top="4845">
+   </BOUNDS>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="2" srcpinname="Rows" dstnodeid="3" dstpinname="Data Table">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="4">
+   <BOUNDS type="Node" left="5640" top="1875" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5640" top="1875" width="480" height="480">
+   </BOUNDS>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Toggle">
+   </PIN>
+   <PIN pinname="Y Input Value" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Loaded" dstnodeid="4" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="5">
+   <BOUNDS type="Node" left="4830" top="6525" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="4830" top="6525" width="2445" height="1020">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="6">
+   <BOUNDS type="Node" left="4845" top="5415" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="3" srcpinname="Row Data" dstnodeid="6" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="6" srcpinname="Output" dstnodeid="5" dstpinname="Input String">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="7">
+   <BOUNDS type="Node" left="7650" top="4845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Columns Count" slicecount="1" visible="1" values="10">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" visible="1" values="1">
+   </PIN>
+   <BOUNDS type="Box" left="7650" top="4845">
+   </BOUNDS>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Columns Count" dstnodeid="7" dstpinname="Columns Count" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="5325" y="3098">
+   </LINKPOINT>
+   <LINKPOINT x="8460" y="3098">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Rows" dstnodeid="7" dstpinname="Data Table" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="4890" y="3825">
+   </LINKPOINT>
+   <LINKPOINT x="7635" y="3825">
+   </LINKPOINT>
+   </LINK>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="8">
+   <BOUNDS type="Node" left="7650" top="5355" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="text">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="7" srcpinname="Row Data" dstnodeid="8" dstpinname="Input">
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="9">
+   <BOUNDS type="Node" left="7665" top="6510" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="7665" top="6510" width="2445" height="1020">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="8" srcpinname="Output" dstnodeid="9" dstpinname="Input String">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="11">
+   <BOUNDS type="Node" left="10725" top="4845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Columns Count" slicecount="1" visible="1" values="10">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" visible="1" values="2">
+   </PIN>
+   <BOUNDS type="Box" left="10725" top="4845">
+   </BOUNDS>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="10">
+   <BOUNDS type="Node" left="10725" top="5535" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="11" srcpinname="Row Data" dstnodeid="10" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Rows" dstnodeid="11" dstpinname="Data Table" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="4890" y="3915">
+   </LINKPOINT>
+   <LINKPOINT x="10725" y="3915">
+   </LINKPOINT>
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="12">
+   <BOUNDS type="Node" left="10740" top="6495" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="10740" top="6495" width="2445" height="1020">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="10" srcpinname="Output" dstnodeid="12" dstpinname="Input String">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="14">
+   <BOUNDS type="Node" left="13530" top="4845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Columns Count" slicecount="1" visible="1" values="10">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" visible="1" values="2">
+   </PIN>
+   <BOUNDS type="Box" left="13530" top="4845">
+   </BOUNDS>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="13">
+   <BOUNDS type="Node" left="13530" top="5460" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="14" srcpinname="Row Data" dstnodeid="13" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Rows" dstnodeid="14" dstpinname="Data Table" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="4890" y="3878">
+   </LINKPOINT>
+   <LINKPOINT x="13530" y="3878">
+   </LINKPOINT>
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="15">
+   <BOUNDS type="Node" left="13545" top="6420" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="13545" top="6420" width="2445" height="1020">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="13" srcpinname="Output" dstnodeid="15" dstpinname="Input String">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="18">
+   <BOUNDS type="Node" left="16305" top="4845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Columns Count" slicecount="1" visible="1" values="10">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" visible="1" values="4">
+   </PIN>
+   <BOUNDS type="Box" left="16305" top="4845">
+   </BOUNDS>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="17">
+   <BOUNDS type="Node" left="16305" top="5370" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="18" srcpinname="Row Data" dstnodeid="17" dstpinname="Input">
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="16">
+   <BOUNDS type="Node" left="16320" top="6330" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="16320" top="6330" width="2445" height="1020">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="17" srcpinname="Output" dstnodeid="16" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Rows" dstnodeid="18" dstpinname="Data Table" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="4890" y="3833">
+   </LINKPOINT>
+   <LINKPOINT x="16305" y="3833">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Columns Count" dstnodeid="11" dstpinname="Columns Count" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="5325" y="3180">
+   </LINKPOINT>
+   <LINKPOINT x="11535" y="3180">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Columns Count" dstnodeid="14" dstpinname="Columns Count" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="5325" y="3143">
+   </LINKPOINT>
+   <LINKPOINT x="14340" y="3143">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Columns Count" dstnodeid="18" dstpinname="Columns Count" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="5325" y="3098">
+   </LINKPOINT>
+   <LINKPOINT x="17115" y="3098">
+   </LINKPOINT>
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="19">
+   <BOUNDS type="Node" left="17760" top="4845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Columns Count" slicecount="1" visible="1" values="10">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" visible="1" values="5">
+   </PIN>
+   <BOUNDS type="Box" left="17760" top="4845">
+   </BOUNDS>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Columns Count" dstnodeid="3" dstpinname="Columns Count">
+   </LINK>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="20">
+   <BOUNDS type="Node" left="17790" top="5430" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="text">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="19" srcpinname="Row Data" dstnodeid="20" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Columns Count" dstnodeid="19" dstpinname="Columns Count" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="5325" y="3075">
+   </LINKPOINT>
+   <LINKPOINT x="18570" y="3075">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Rows" dstnodeid="19" dstpinname="Data Table" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="4890" y="3810">
+   </LINKPOINT>
+   <LINKPOINT x="17760" y="3810">
+   </LINKPOINT>
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="22">
+   <BOUNDS type="Node" left="17850" top="7725" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="17850" top="7725" width="2445" height="1020">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="20" srcpinname="Output" dstnodeid="22" dstpinname="Input String">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="23">
+   <BOUNDS type="Node" left="19425" top="4845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   <PIN pinname="Columns Count" slicecount="1" visible="1" values="10">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" visible="1" values="6">
+   </PIN>
+   <BOUNDS type="Box" left="19425" top="4845">
+   </BOUNDS>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="2" srcpinname="Rows" dstnodeid="23" dstpinname="Data Table" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="4890" y="3825">
+   </LINKPOINT>
+   <LINKPOINT x="19425" y="3825">
+   </LINKPOINT>
+   </LINK>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="25">
+   <BOUNDS type="Node" left="19410" top="5415" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1" slicecount="1" values="text">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="23" srcpinname="Row Data" dstnodeid="25" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Columns Count" dstnodeid="23" dstpinname="Columns Count" linkstyle="Bezier" hiddenwhenlocked="1">
+   <LINKPOINT x="5325" y="3090">
+   </LINKPOINT>
+   <LINKPOINT x="20235" y="3090">
+   </LINKPOINT>
+   </LINK>
+   <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="26">
+   <BOUNDS type="Node" left="19470" top="9360" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="19470" top="9360" width="2445" height="1020">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="1" slicecount="1" values="||">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="25" srcpinname="Output" dstnodeid="26" dstpinname="Input String">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Data Row" dstnodeid="3" dstpinname="Data Row">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Data Row" dstnodeid="7" dstpinname="Data Row">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Data Row" dstnodeid="11" dstpinname="Data Row">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Data Row" dstnodeid="14" dstpinname="Data Row">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Data Row" dstnodeid="18" dstpinname="Data Row">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Data Row" dstnodeid="19" dstpinname="Data Row">
+   </LINK>
+   <LINK srcnodeid="2" srcpinname="Data Row" dstnodeid="23" dstpinname="Data Row">
+   </LINK>
+   <NODE systemname="Renderer (TTY)" nodename="Renderer (TTY)" componentmode="InAWindow" id="27">
+   <BOUNDS type="Node" left="8535" top="1125" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="8535" top="1125" width="2400" height="1800">
+   </BOUNDS>
+   <BOUNDS type="Window" left="22560" top="2145" width="6240" height="5085">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="Reader (XLSX)" filename="bin\Debug\V.dll" nodename="Reader (XLSX)" componentmode="Hidden" id="28">
+   <BOUNDS type="Node" left="8190" top="2475" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Read" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Data Table" visible="1">
+   </PIN>
+   <PIN pinname="Has Headers" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="29" systemname="IOBox (String)">
+   <BOUNDS type="Box" left="8190" top="1785" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="8190" top="1785" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input String" slicecount="1" values="|..\..\..\Mathrioshka Collaborative\Thomson Reuters\UrbanData\In\2013-10-09 Semantic Data\безопасность_общий.xlsx|">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="|All Files (*.*)||*.*|">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   <PIN pinname="String Type" slicecount="1" values="Filename">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="29" srcpinname="Output String" dstnodeid="28" dstpinname="Filename">
+   </LINK>
+   <NODE nodename="IOBox (Node)" componentmode="InABox" id="30" systemname="IOBox (Node)">
+   <BOUNDS type="Box" left="8190" top="3465" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="8190" top="3465" width="0" height="0">
+   </BOUNDS>
+   </NODE>
+   <LINK srcnodeid="28" srcpinname="Data Table" dstnodeid="30" dstpinname="Input Node">
+   </LINK>
+   <NODE systemname="AsRows" filename="bin\Debug\V.dll" nodename="AsRows" componentmode="Hidden" id="31">
+   <BOUNDS type="Node" left="12495" top="3135" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Table" visible="1">
+   </PIN>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="28" srcpinname="Data Table" dstnodeid="31" dstpinname="Data Table">
+   </LINK>
+   <NODE systemname="GetColumn (String)" filename="bin\Debug\V.dll" nodename="GetColumn (String)" componentmode="Hidden" id="32">
+   <BOUNDS type="Node" left="12495" top="3720" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Data Row" visible="1">
+   </PIN>
+   <PIN pinname="Column Index" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Row Data" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="31" srcpinname="Data Row" dstnodeid="32" dstpinname="Data Row">
+   </LINK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="33" systemname="IOBox (String)">
+   <BOUNDS type="Box" left="12495" top="4425" width="2475" height="300">
+   </BOUNDS>
+   <BOUNDS type="Node" left="12495" top="4425" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Default" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="32" srcpinname="Row Data" dstnodeid="33" dstpinname="Input String">
+   </LINK>
+   <NODE systemname="GetSlice (String)" nodename="GetSlice (String)" componentmode="Hidden" id="34">
+   <BOUNDS type="Node" left="11895" top="5310" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Index" slicecount="1" values="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="32" srcpinname="Row Data" dstnodeid="34" dstpinname="Input">
+   </LINK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="35" systemname="IOBox (String)">
+   <BOUNDS type="Box" left="11880" top="6015" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="11880" top="6015" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Default" slicecount="1" values="text">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="34" srcpinname="Output" dstnodeid="35" dstpinname="Input String">
+   </LINK>
+   </PATCH>

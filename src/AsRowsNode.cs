@@ -9,7 +9,7 @@ namespace VVVV.Nodes.V
 		[Input("Data Table")] 
 		public IDiffSpread<DataTable> FTableIn;
 
-		[Output("Rows")] 
+		[Output("Data Row")] 
 		public ISpread<ISpread<DataRow>> FRowsOut;
 
 		public void Evaluate(int spreadMax)
