@@ -78,10 +78,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsRowsNode.cs" />
+    <Compile Include="CleanStringNode.cs" />
     <Compile Include="GetColumnNode.cs" />
     <Compile Include="ReaderCSVNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReaderXLSNode.cs" />
+    <Compile Include="ReaderXlsxNode.cs" />
     <Compile Include="TableExtensions.cs" />
     <Compile Include="TableReader.cs" />
     <Compile Include="WhereLinqNode.cs" />

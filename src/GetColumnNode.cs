@@ -22,6 +22,8 @@ namespace VVVV.Nodes.V
 
 		public void Evaluate(int spreadMax)
 		{
+			if(spreadMax == 0) return;
+
 			FRowData.SliceCount = FRowIn[0] == null ? 0 : spreadMax;
 			
 			if(FRowData.SliceCount == 0) return;
@@ -33,7 +35,9 @@ namespace VVVV.Nodes.V
 				if (FRowIn[i] == null) continue;
 				try
 				{
-					FRowData[i] = FRowIn[i].Field<T>(FColumnIndexIn[i]);
+					var columnsCount = FRowIn[i].Table.Columns.Count;
+
+					FRowData[i] = FRowIn[i].Field<T>(FColumnIndexIn[i] % columnsCount);
 				}
 				catch (Exception ex)
 				{

@@ -11,8 +11,11 @@ using VVVV.PluginInterfaces.V2;
 namespace VVVV.Nodes.V
 {
 	[PluginInfo(Name = "Reader", Category = "XLSX", Author = "alg", Tags = "data visualization")]
-	public class ReaderXlsNode : TableReader
+	public class ReaderXlsxNode : TableReader
 	{
+		[Input("Skip Rows", Visibility = PinVisibility.OnlyInspector)] 
+		public ISpread<int> FSkipRowsIn;
+
 		public override void Evaluate(int spreadMax)
 		{
 			var maxTables = FFileNameIn.SliceCount;
@@ -43,10 +46,14 @@ namespace VVVV.Nodes.V
 						var columnsCount = worksheet.Dimension.End.Column;
 
 						var headers = new string[columnsCount];
+						
+						var skipRows = FSkipRowsIn[i];
 
+						
 						if (hasHeaders)
 						{
 							headers = GetHeaders(columnsCount, cells);
+							skipRows++;
 						}
 						else
 						{
@@ -61,7 +68,7 @@ namespace VVVV.Nodes.V
 							table.CreateColumn(headers[j], FColumnTypeIn[i][j]);
 						}
 
-						for (var j = 0; j < rowsCount; j++)
+						for (var j = 0 + skipRows; j < rowsCount; j++)
 						{
 							var row = table.NewRow();
 
@@ -91,7 +98,7 @@ namespace VVVV.Nodes.V
 
 			for (var i = 0; i < columnsCount; i++)
 			{
-				headers[0] = cells[0, i].Text;
+				headers[0] = cells[1, i + 1].Text;
 			}
 
 			return headers;
