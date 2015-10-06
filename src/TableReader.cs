@@ -12,28 +12,28 @@ namespace VVVV.Nodes.V
 	public abstract class TableReader : IPluginEvaluate
 	{
 		[Input("Filename", StringType = StringType.Filename)]
-		public IDiffSpread<string> FFileNameIn;
+		protected IDiffSpread<string> FFileNameIn;
 
 		[Input("Has Headers", IsToggle = true)]
-		public IDiffSpread<bool> FHasHeadersIn;
+		protected IDiffSpread<bool> FHasHeadersIn;
 
 		[Input("Column Type", DefaultString = "string")]
-		public IDiffSpread<ISpread<string>> FColumnTypeIn;
+		protected IDiffSpread<ISpread<string>> FColumnTypeIn;
 
 		[Input("Read", IsBang = true, IsSingle = true)]
-		public ISpread<bool> FReadIn;
+		protected ISpread<bool> FReadIn;
 
 		[Output("Data Table")]
-		public ISpread<DataTable> FTableOut;
+		protected ISpread<DataTable> FTableOut;
 
 		[Output("Columns Count")]
-		public ISpread<int> FColumnsCountOut;
+		protected ISpread<int> FColumnsCountOut;
 
 		[Output("Loaded")]
-		public ISpread<bool> FLoaded;
+		protected ISpread<bool> FLoaded;
 
 		[Import]
-		public ILogger FLogger;
+		protected ILogger FLogger;
 
 		public virtual void Evaluate(int spreadMax)
 		{

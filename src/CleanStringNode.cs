@@ -7,7 +7,7 @@ namespace VVVV.Nodes.V
 	[PluginInfo(Name = "CleanSymbols", Category = "String", Author = "alg", Tags = "data visualization")]
 	public class CleanStringNode : IPluginEvaluate
 	{
-		[Input("Input", DefaultString = "text")] 
+		[Input("Input", DefaultString = "vvvv")] 
 		public IDiffSpread<string> FInput;
 
 		[Output("Output")]

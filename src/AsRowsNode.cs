@@ -7,10 +7,10 @@ namespace VVVV.Nodes.V
 	public class AsRowsNode : IPluginEvaluate
 	{
 		[Input("Data Table")] 
-		public IDiffSpread<DataTable> FTableIn;
+		protected IDiffSpread<DataTable> FTableIn;
 
 		[Output("Data Row")] 
-		public ISpread<ISpread<DataRow>> FRowsOut;
+		protected ISpread<ISpread<DataRow>> FRowsOut;
 
 		public void Evaluate(int spreadMax)
 		{
@@ -21,6 +21,7 @@ namespace VVVV.Nodes.V
 			for (var i = 0; i < spreadMax; i++)
 			{
 				if (FTableIn[i] == null) continue;
+
 				FRowsOut[i].AssignFrom(FTableIn[i].AsEnumerable());	
 			}
 		}

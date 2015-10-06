@@ -12,16 +12,16 @@ namespace VVVV.Nodes.V
 	public class ReaderCsvNode : TableReader
 	{		
 		[Input("Delimiter", DefaultString = ";", Visibility = PinVisibility.OnlyInspector)]
-		public IDiffSpread<string> FDelimiterIn;
+		protected IDiffSpread<string> FDelimiterIn;
 
 		[Input("Quote Character", DefaultString = "\"", Visibility = PinVisibility.OnlyInspector)]
-		public IDiffSpread<string> FQuoteCharIn;
+		protected IDiffSpread<string> FQuoteCharIn;
 
 		[Input("Escape Chararacter", DefaultString = "\\", Visibility = PinVisibility.OnlyInspector)]
-		public IDiffSpread<string> FEcapeCharIn;
+		protected IDiffSpread<string> FEcapeCharIn;
 
 		[Input("Comment Character", DefaultString = "#", Visibility = PinVisibility.OnlyInspector)]
-		public IDiffSpread<string> FCommentCharIn;
+		protected IDiffSpread<string> FCommentCharIn;
 
 		public override void Evaluate(int spreadMax)
 		{

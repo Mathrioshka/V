@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Linq.Dynamic;
 using System.Data;
 using System.Linq;
+using System.Linq.Dynamic;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 
