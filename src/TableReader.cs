@@ -26,8 +26,8 @@ namespace VVVV.Nodes.V
 		[Output("Data Table")]
 		protected ISpread<DataTable> FTableOut;
 
-		[Output("Columns Count")]
-		protected ISpread<int> FColumnsCountOut;
+		[Output("Headers")]
+		protected ISpread<ISpread<string>> FHeadersOut;
 
 		[Output("Loaded")]
 		protected ISpread<bool> FLoaded;

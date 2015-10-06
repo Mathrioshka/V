@@ -19,7 +19,7 @@ namespace VVVV.Nodes.V
 		public override void Evaluate(int spreadMax)
 		{
 			var maxTables = FFileNameIn.SliceCount;
-			FTableOut.SliceCount = FColumnsCountOut.SliceCount = FLoaded.SliceCount = maxTables;
+			FTableOut.SliceCount = FHeadersOut.SliceCount = FLoaded.SliceCount = maxTables;
 
 			if (!FFileNameIn.IsChanged && !FHasHeadersIn.IsChanged && !FColumnTypeIn.IsChanged && !FReadIn[0]) return;
 
@@ -27,7 +27,8 @@ namespace VVVV.Nodes.V
 			{
 				var fileInfo = new FileInfo(FFileNameIn[i]);
 				var hasHeaders = FHasHeadersIn[i];
-				FColumnsCountOut[i] = 0;
+			    
+                FHeadersOut[i].SliceCount = 0;
 
 				var table = new DataTable();
 
@@ -63,6 +64,9 @@ namespace VVVV.Nodes.V
 							}
 						}
 
+					    FHeadersOut[i].SliceCount = headers.Length;
+                        FHeadersOut[i].AssignFrom(headers);
+
 						for (var j = 0; j < columnsCount; j++)
 						{
 							table.CreateColumn(headers[j], FColumnTypeIn[i][j]);
@@ -81,7 +85,6 @@ namespace VVVV.Nodes.V
 						}
 
 						FTableOut[i] = table;
-						FColumnsCountOut[i] = columnsCount;
 						FLoaded[i] = true;
 					}
 				}

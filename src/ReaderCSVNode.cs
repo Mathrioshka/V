@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Data;
 using System.IO;
+using System.Linq;
 using LumenWorks.Framework.IO.Csv;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
@@ -26,7 +27,7 @@ namespace VVVV.Nodes.V
 		public override void Evaluate(int spreadMax)
 		{
 			var maxTables = FFileNameIn.SliceCount;
-			FTableOut.SliceCount = FColumnsCountOut.SliceCount = FLoaded.SliceCount = maxTables;
+			FTableOut.SliceCount = FHeadersOut.SliceCount = FLoaded.SliceCount = maxTables;
 
 			if (!FFileNameIn.IsChanged && !FHasHeadersIn.IsChanged && !FColumnTypeIn.IsChanged && !FDelimiterIn.IsChanged 
 					&& !FQuoteCharIn.IsChanged && !FEcapeCharIn.IsChanged && !FCommentCharIn.IsChanged && !FReadIn[0]) return;
@@ -37,7 +38,8 @@ namespace VVVV.Nodes.V
 
 				var table = new DataTable();
 				FLoaded[i] = false;
-				FColumnsCountOut[i] = 0;
+				FHeadersOut[i].SliceCount = 0;
+
 				try
 				{
 					using (var csv = new CsvReader(new StreamReader(FFileNameIn[i]), hasHeaders, FDelimiterIn[i][0], FQuoteCharIn[i][0], 
@@ -58,6 +60,9 @@ namespace VVVV.Nodes.V
 							}
 						}
 
+					    FHeadersOut[i].SliceCount = headers.Length;
+                        FHeadersOut[i].AssignFrom(headers);
+
 						for (var j = 0; j < fieldCount; j++)
 						{
 							table.CreateColumn(headers[j], FColumnTypeIn[i][j]);
@@ -76,7 +81,6 @@ namespace VVVV.Nodes.V
 						}
 
 						FTableOut[i] = table;
-						FColumnsCountOut[i] = table.Columns.Count;
 						FLoaded[i] = true;
 					}
 				}
