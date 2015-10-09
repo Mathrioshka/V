@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using VVVV.PluginInterfaces.V2;
 using System.Net.Http;
+using VVVV.Core.Logging;
 
 namespace VVVV.Nodes.V
 {
@@ -18,7 +19,10 @@ namespace VVVV.Nodes.V
         protected ISpread<bool> FRefreshIn;
 
         [Output("Body")] 
-        protected ISpread<string> FBodyOut; 
+        protected ISpread<string> FBodyOut;
+
+        [Import()]
+        protected ILogger FLogger;
 
         protected HttpClient FClient;
 
@@ -38,10 +42,17 @@ namespace VVVV.Nodes.V
 
         protected async void GetContent(int index)
         {
-            var result = await FClient.GetAsync(new Uri(FUrlIn[index]));
-            var content = await result.Content.ReadAsStringAsync();
+            try
+            {
+                var result = await FClient.GetAsync(new Uri(FUrlIn[index]));
+                var content = await result.Content.ReadAsStringAsync();
 
-            FBodyOut[index] = content;
+                FBodyOut[index] = content;
+            }
+            catch (Exception a)
+            {
+                FLogger.Log(LogType.Error, "Can't fetch data");
+            }
         }
 
         public void OnImportsSatisfied()
