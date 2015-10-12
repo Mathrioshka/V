@@ -4,7 +4,7 @@ using System.Data;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 
-namespace VVVV.Nodes.V
+namespace VVVV.Nodes.V.DTable
 {
 	public abstract class GetColumn<TOut, TIndex> : IPluginEvaluate
 	{

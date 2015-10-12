@@ -1,17 +1,16 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using VVVV.PluginInterfaces.V2;
 
-namespace VVVV.Nodes.V
+namespace VVVV.Nodes.V.String
 {
-	[PluginInfo(Name = "AsId", Category = "String", Author = "alg", Tags = "data visualization", Help = "Converts string to lower case letters and digits only, so it can be used as ID")]
+	[PluginInfo(Name = "AsId", Category = "String", Author = "alg", Tags = "V", Help = "Converts string to lower case letters and digits only, so it can be used as ID")]
 	public class AsIdNode : IPluginEvaluate
 	{
-		[Input("Input", DefaultString = "text")] 
-		public IDiffSpread<string> FInput;
+		[Input("Input", DefaultString = "VvVv 1. ,, 8")] 
+		protected IDiffSpread<string> FInput;
 
 		[Output("Output")]
-		public ISpread<string> FOutput; 
+		protected ISpread<string> FOutput; 
 		
 		public void Evaluate(int spreadMax)
 		{

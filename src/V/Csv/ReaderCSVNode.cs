@@ -1,13 +1,11 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using System.Data;
 using System.IO;
-using System.Linq;
 using LumenWorks.Framework.IO.Csv;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 
-namespace VVVV.Nodes.V
+namespace VVVV.Nodes.V.Csv
 {
 	[PluginInfo(Name = "Reader", Category = "CSV", Author = "alg", Tags = "data visualization")]
 	public class ReaderCsvNode : TableReader

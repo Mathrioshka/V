@@ -1,17 +1,16 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using VVVV.PluginInterfaces.V2;
 
-namespace VVVV.Nodes.V
+namespace VVVV.Nodes.V.String
 {
 	[PluginInfo(Name = "CleanSymbols", Category = "String", Author = "alg", Tags = "data visualization")]
-	public class CleanStringNode : IPluginEvaluate
+	public class CleanSymbolsNode : IPluginEvaluate
 	{
 		[Input("Input", DefaultString = "vvvv")] 
-		public IDiffSpread<string> FInput;
+		protected IDiffSpread<string> FInput;
 
 		[Output("Output")]
-		public ISpread<string> FOutput; 
+		protected ISpread<string> FOutput; 
 		
 		public void Evaluate(int spreadMax)
 		{
@@ -21,7 +20,7 @@ namespace VVVV.Nodes.V
 
 			for (var i = 0; i < spreadMax; i++)
 			{
-				FOutput[i] = new String(FInput[i].Where((c => Char.IsLetterOrDigit(c) || Char.IsPunctuation(c) || Char.IsWhiteSpace(c) && c != '"')).ToArray());
+				FOutput[i] = new string(FInput[i].Where((c => char.IsLetterOrDigit(c) || char.IsPunctuation(c) || char.IsWhiteSpace(c) && c != '"')).ToArray());
 			}
 		}
 	}

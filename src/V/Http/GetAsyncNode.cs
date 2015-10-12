@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
 using VVVV.PluginInterfaces.V2;
 using System.Net.Http;
 using VVVV.Core.Logging;
 
-namespace VVVV.Nodes.V
+namespace VVVV.Nodes.V.Http
 {
     [PluginInfo(Name = "GetAsync")]
     public class GetAsyncNode : IPluginEvaluate, IPartImportsSatisfiedNotification
@@ -24,7 +21,7 @@ namespace VVVV.Nodes.V
         [Import()]
         protected ILogger FLogger;
 
-        protected HttpClient FClient;
+        private HttpClient FClient;
 
         public void Evaluate(int spreadMax)
         {
@@ -49,7 +46,7 @@ namespace VVVV.Nodes.V
 
                 FBodyOut[index] = content;
             }
-            catch (Exception a)
+            catch
             {
                 FLogger.Log(LogType.Error, "Can't fetch data");
             }

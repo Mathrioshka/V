@@ -1,9 +1,9 @@
 ﻿using System.Data;
 using VVVV.PluginInterfaces.V2;
 
-namespace VVVV.Nodes.V
+namespace VVVV.Nodes.V.DTable
 {
-	[PluginInfo(Name = "AsRows", Author = "alg")]
+	[PluginInfo(Name = "AsRows", Author = "alg", Category = "DataTable", Tags = "csv", Help = "Converts DataTale to spread of rows")]
 	public class AsRowsNode : IPluginEvaluate
 	{
 		[Input("Data Table")] 

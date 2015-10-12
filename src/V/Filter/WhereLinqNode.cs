@@ -6,29 +6,29 @@ using System.Linq.Dynamic;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 
-namespace VVVV.Nodes.V
+namespace VVVV.Nodes.V.Filter
 {
 	[PluginInfo(Name = "Where", Author = "alg")]
 	public class WhereLinqNode : IPluginEvaluate
 	{
 		[Input("Data Table")]
-		public IDiffSpread<DataTable> FDataTableIn;
+		protected IDiffSpread<DataTable> FDataTableIn;
 
 		[Input("Where Expression", DefaultString = "row => Convert.ToDouble(row[0]) >= 37")] 
-		public IDiffSpread<string> FExpressionIn;
+		protected IDiffSpread<string> FExpressionIn;
 
 		[Input("Refresh", IsBang = true, IsSingle = true)] 
-		public ISpread<bool> FRefreshIn;
+		protected ISpread<bool> FRefreshIn;
 		
 		[Output("Rows")] 
-		public ISpread<ISpread<DataRow>> FRows;
+		protected ISpread<ISpread<DataRow>> FRowsOut;
 		
 		[Import] 
-		public ILogger FLogger; 
+		protected ILogger FLogger; 
 
 		public void Evaluate(int spreadMax)
 		{
-			FRows.SliceCount = FDataTableIn[0] == null ? 0 : FDataTableIn.SliceCount;
+			FRowsOut.SliceCount = FDataTableIn[0] == null ? 0 : FDataTableIn.SliceCount;
 
 			if(!FDataTableIn.IsChanged && !FExpressionIn.IsChanged && !FRefreshIn[0]) return;
 			
@@ -48,7 +48,7 @@ namespace VVVV.Nodes.V
 					FLogger.Log(LogType.Error, ex.Message);
 				}
 
-				FRows[i].AssignFrom(result);
+				FRowsOut[i].AssignFrom(result);
 			}
 		}
 	}

@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using OfficeOpenXml;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 
-namespace VVVV.Nodes.V
+namespace VVVV.Nodes.V.Xlsx
 {
 	[PluginInfo(Name = "Reader", Category = "XLSX", Author = "alg", Tags = "data visualization")]
 	public class ReaderXlsxNode : TableReader
 	{
 		[Input("Skip Rows", Visibility = PinVisibility.OnlyInspector)] 
-		public ISpread<int> FSkipRowsIn;
+		protected ISpread<int> FSkipRowsIn;
 
 		public override void Evaluate(int spreadMax)
 		{
