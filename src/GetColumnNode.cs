@@ -6,27 +6,27 @@ using VVVV.PluginInterfaces.V2;
 
 namespace VVVV.Nodes.V
 {
-	public abstract class GetColumn<T> : IPluginEvaluate
+	public abstract class GetColumn<TOut, TIndex> : IPluginEvaluate
 	{
 		[Input("Data Row")]
-		public IDiffSpread<DataRow> FRowIn;
+		protected IDiffSpread<DataRow> FRowIn;
 
-		[Input("Column Index", MinValue = 0)]
-		public IDiffSpread<int> FColumnIndexIn;
+		[Input("Column", MinValue = 0)]
+		protected IDiffSpread<TIndex> FColumnIndexIn;
 		
 		[Output("Row Data")]
-		public ISpread<T> FRowData;
+		protected ISpread<TOut> FRowDataOut;
 
 		[Import]
-		public ILogger FLogger;
+		protected ILogger FLogger;
 
 		public void Evaluate(int spreadMax)
 		{
 			if(spreadMax == 0) return;
 
-			FRowData.SliceCount = FRowIn[0] == null ? 0 : spreadMax;
+			FRowDataOut.SliceCount = FRowIn[0] == null ? 0 : spreadMax;
 			
-			if(FRowData.SliceCount == 0) return;
+			if(FRowDataOut.SliceCount == 0) return;
 
 			if(!FRowIn.IsChanged && !FColumnIndexIn.IsChanged) return;
 			
@@ -35,9 +35,7 @@ namespace VVVV.Nodes.V
 				if (FRowIn[i] == null) continue;
 				try
 				{
-					var columnsCount = FRowIn[i].Table.Columns.Count;
-
-					FRowData[i] = FRowIn[i].Field<T>(FColumnIndexIn[i] % columnsCount);
+                    AssignValue(i);
 				}
 				catch (Exception ex)
 				{
@@ -45,11 +43,47 @@ namespace VVVV.Nodes.V
 				}
 			}
 		}
+
+	    protected abstract void AssignValue(int sliceIndex);
 	}
 
-	[PluginInfo(Name = "GetColumn", Category = "String", Author = "alg")]
-	public class GetColumnString : GetColumn<string>{}
+    [PluginInfo(Name = "GetColumn", Category = "String", Version = "Index", Author = "alg")]
+    public class GetColumnByIndexString : GetColumn<string, int>
+    {
+        protected override void AssignValue(int sliceIndex)
+        {
+            var columnsCount = FRowIn[sliceIndex].Table.Columns.Count;
 
-	[PluginInfo(Name = "GetColumn", Category = "Value", Author = "alg")]
-	public class GetColumnDouble : GetColumn<double> {}
+            FRowDataOut[sliceIndex] = FRowIn[sliceIndex].Field<string>(FColumnIndexIn[sliceIndex] % columnsCount);
+        }
+    }
+
+//    [PluginInfo(Name = "GetColumn", Category = "Value", Version = "Index", Author = "alg")]
+//    public class GetColumnByIndexDouble : GetColumn<double, int>
+//    {
+//        protected override void AssignValue(int sliceIndex)
+//        {
+//            var columnsCount = FRowIn[sliceIndex].Table.Columns.Count;
+//
+//            FRowDataOut[sliceIndex] = FRowIn[sliceIndex].Field<double>(FColumnIndexIn[sliceIndex] % columnsCount);
+//        }
+//    }
+
+//    [PluginInfo(Name = "GetColumn", Category = "Value", Version = "Name", Author = "alg")]
+//    public class GetColumnByNameDouble : GetColumn<double, string>
+//    {
+//        protected override void AssignValue(int sliceIndex)
+//        {
+//            FRowDataOut[sliceIndex] = (double) FRowIn[sliceIndex][FColumnIndexIn[sliceIndex]];
+//        }
+//    }
+
+    [PluginInfo(Name = "GetColumn", Category = "String", Version = "Name", Author = "alg")]
+    public class GetColumnByNameString : GetColumn<string, string>
+    {
+        protected override void AssignValue(int sliceIndex)
+        {
+            FRowDataOut[sliceIndex] = (string) FRowIn[sliceIndex][FColumnIndexIn[sliceIndex]];
+        }
+    }
 }
