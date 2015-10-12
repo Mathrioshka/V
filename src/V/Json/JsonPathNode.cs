@@ -39,7 +39,25 @@ namespace VVVV.Nodes.V.Json
 				{
 					try
 					{
-					    var values = FJObjectIn[i].SelectTokens(FQueryIn[i]).Select(token => token.Value<string>()).ToList();
+					    var tokens = FJObjectIn[i].SelectTokens(FQueryIn[i]);
+
+                        var values = new List<string>();
+                        foreach (var token in tokens)
+                        {
+
+                            if (token is JProperty)
+                            {
+                                values.Add(token.ToString());
+                            }
+                            else if (token is JValue)
+                            {
+                                values.Add(token.Value<string>());
+                            }
+                            else if (token is JArray)
+                            {
+                                values.AddRange(token.Values<string>());
+                            }
+					    }
 
                         if(values.Any())
 					    {
