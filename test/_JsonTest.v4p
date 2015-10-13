@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta34.1.dtd" >
-   <PATCH nodename="D:\projects\V\test\_JsonTest.v4p" systemname="_JsonTests" filename="C:\Users\Vadim\Dropbox\VVVV\plugins\JSONParse\_JsonTests.v4p" scrollx="0" scrolly="3855">
+   <PATCH nodename="D:\projects\V\test\_JsonTest.v4p" systemname="_JsonTests" filename="C:\Users\Vadim\Dropbox\VVVV\plugins\JSONParse\_JsonTests.v4p" scrollx="1245" scrolly="4650">
    <BOUNDS type="Window" left="16185" top="4470" width="15660" height="10650">
    </BOUNDS>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="3" systemname="IOBox (Value Advanced)">
@@ -43,7 +43,7 @@
    </BOUNDS>
    <BOUNDS type="Box" left="6435" top="3585" width="1920" height="375">
    </BOUNDS>
-   <PIN pinname="Input String" slicecount="1" encoded="0" values="assets\test.json">
+   <PIN pinname="Input String" slicecount="1" encoded="0" values="assets\responce.json">
    </PIN>
    <PIN pinname="Default" slicecount="1" encoded="0" values="file.txt">
    </PIN>
@@ -73,7 +73,7 @@
    </BOUNDS>
    <PIN pinname="Output String" visible="1">
    </PIN>
-   <PIN pinname="Input String" slicecount="1" encoded="0" values="$.phoneNumbers">
+   <PIN pinname="Input String" slicecount="1" encoded="0" values="$.kebabs.*.*">
    </PIN>
    </NODE>
    <NODE systemname="IOBox (String)" nodename="IOBox (String)" componentmode="InABox" id="12">
