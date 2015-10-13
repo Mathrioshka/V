@@ -39,36 +39,17 @@ namespace VVVV.Nodes.V.Json
 				{
 					try
 					{
-					    var tokens = FJObjectIn[i].SelectTokens(FQueryIn[i]);
+					    var values = FParser.SelectNodes(FJObjectIn[i], FQueryIn[i]).Select(node => (string) node.Value).ToList();
 
-                        var values = new List<string>();
-                        foreach (var token in tokens)
-                        {
-                            //ToDO: Refactor to proper Dict-Func method
-                            if (token is JProperty)
-                            {
-                                values.Add(token.ToString());
-                            }
-                            else if (token is JValue)
-                            {
-                                values.Add(token.Value<string>());
-                            }
-                            else if (token is JArray)
-                            {
-                                values.AddRange(token.Values<string>());
-                            }
-					    }
-
-                        if(values.Any())
+					    if (values.Any())
 					    {
-                            FDataOut[i].SliceCount = values.Count();
+					        FDataOut[i].SliceCount = values.Count();
                             FDataOut[i].AssignFrom(values);
 					    }
-                        else
-                        {
-                            FDataOut[i].SliceCount = 0;
-                        }
-					    
+					    else
+					    {
+					        FDataOut[i].SliceCount = 0;
+					    }
 					}
 					catch (Exception ex)
 					{
