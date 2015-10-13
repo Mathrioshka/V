@@ -44,7 +44,7 @@ namespace VVVV.Nodes.V.Json
                         var values = new List<string>();
                         foreach (var token in tokens)
                         {
-
+                            //ToDO: Refactor to proper Dict-Func method
                             if (token is JProperty)
                             {
                                 values.Add(token.ToString());
@@ -72,8 +72,6 @@ namespace VVVV.Nodes.V.Json
 					}
 					catch (Exception ex)
 					{
-						//FLogger.Log(LogType.Error, "Query is wrong at slice " + i);
-						
 						FLogger.Log(LogType.Error, ex.ToString());
 					}
 				}
