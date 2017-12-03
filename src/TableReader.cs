@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data;
-using System.Linq;
-using System.Text;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 
